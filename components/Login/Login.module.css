@@ -1,0 +1,19 @@
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.heightMax {
+    height: 100%
+}
+
+.switchForm {
+    color: black; 
+    text-decoration: underline; 
+}
+
+.svg {
+    flex: 1 1 50%;
+	object-fit: cover;
+	overflow: hidden;
+}

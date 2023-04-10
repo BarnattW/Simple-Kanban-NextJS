@@ -1,0 +1,23 @@
+.borderCoffee {
+    border-width: 0 0 1px 0;
+    border-color: var(--main-bg-coffee);
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.sticky {
+    position: sticky;
+    top: 0;
+}
+
+.header {
+    background-color:var(--header-bg-coffee);
+    justify-content: space-between;
+}
+
+.paddingTen {
+    padding: 10px;
+}
