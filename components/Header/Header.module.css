@@ -3,6 +3,11 @@
     border-color: var(--main-bg-coffee);
 }
 
+.flex {
+    display: flex;
+    flex-grow: 1;
+}
+
 .flexRow {
     display: flex;
     flex-direction: row;

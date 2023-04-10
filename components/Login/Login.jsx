@@ -133,102 +133,103 @@ function Login(props) {
 			<Image
 				src="svg/low-poly-grid-haikei.svg"
 				alt={"login"}
-				width="500"
-				height="500"
-				className="classes.svg"
+				className={classes.svg}
 			></Image>
+			<div className={[classes.heightMax, classes.flexColumn].join(" ")}>
+				<Card
+					backgroundColor="#FFF8EA"
+					borderRadius={0}
+					color="#815B5B"
+					flex="1 1 50%"
+					minW="300px"
+					padding="0 20px 0 20px"
+				>
+					<CardHeader>
+						<Heading>
+							{isLogin ? "Login to Simple Kanban" : "Create An Account"}
+						</Heading>
+					</CardHeader>
 
-			<Card
-				backgroundColor="#FFF8EA"
-				borderRadius={0}
-				color="#815B5B"
-				flex="1 1 50%"
-				minW="300px"
-				padding="0 20px 0 20px"
-			>
-				<CardHeader>
-					<Heading>
-						{isLogin ? "Login to Simple Kanban" : "Create An Account"}
-					</Heading>
-				</CardHeader>
-
-				<CardBody>
-					<form onSubmit={isLogin ? login : signup}>
-						<FormControl isRequired marginBottom="24px">
-							<FormLabel requiredIndicator>Email</FormLabel>
-							<Input type="email" ref={usernameRef} />
-						</FormControl>
-
-						<FormControl isRequired isInvalid={isError} marginBottom="24px">
-							<FormLabel requiredIndicator>
-								{isLogin ? "Password" : "Password (min. 8 characters)"}
-							</FormLabel>
-							<InputGroup maxW="450px">
-								<Input type={show ? "text" : "password"} ref={passwordRef} />
-								<InputRightElement>
-									<IconButton
-										icon={<ViewIcon />}
-										variant="cardIconButton"
-										onClick={handleClick}
-									></IconButton>
-								</InputRightElement>
-							</InputGroup>
-							{authSuccess === false && isLogin ? (
-								<FormErrorMessage marginTop={0}>
-									Invalid password or email. Please try again.
-								</FormErrorMessage>
-							) : (
-								<></>
-							)}
-							{isLogin ? (
-								<></>
-							) : (
-								<FormErrorMessage marginTop={0}>
-									Password must be at least 8 characters long.
-								</FormErrorMessage>
-							)}
-						</FormControl>
-
-						{isLogin ? (
-							<> </>
-						) : (
-							<FormControl
-								isRequired
-								isInvalid={isErrorMatch}
-								marginBottom="24px"
-							>
-								<FormLabel requiredIndicator>Confirm Password</FormLabel>
-								<Input type="password" ref={confirmPasswordRef} />
-
-								<FormErrorMessage marginTop={0}>
-									Password do not match. Please try again.
-								</FormErrorMessage>
+					<CardBody>
+						<form onSubmit={isLogin ? login : signup}>
+							<FormControl isRequired marginBottom="24px">
+								<FormLabel requiredIndicator>Email</FormLabel>
+								<Input type="email" ref={usernameRef} />
 							</FormControl>
-						)}
-						<Button variant="userAuthButton" type="submit">
-							{isLogin ? "Login" : "Create"}
-						</Button>
 
-						{registerSuccess === false ? (
-							<div>Email already registered. Please try another email.</div>
-						) : (
-							<></>
-						)}
-					</form>
-				</CardBody>
+							<FormControl isRequired isInvalid={isError} marginBottom="24px">
+								<FormLabel requiredIndicator>
+									{isLogin ? "Password" : "Password (min. 8 characters)"}
+								</FormLabel>
+								<InputGroup maxW="450px">
+									<Input type={show ? "text" : "password"} ref={passwordRef} />
+									<InputRightElement>
+										<IconButton
+											icon={<ViewIcon />}
+											variant="cardIconButton"
+											onClick={handleClick}
+										></IconButton>
+									</InputRightElement>
+								</InputGroup>
+								{authSuccess === false && isLogin ? (
+									<FormErrorMessage marginTop={0}>
+										Invalid password or email. Please try again.
+									</FormErrorMessage>
+								) : (
+									<></>
+								)}
+								{isLogin ? (
+									<></>
+								) : (
+									<FormErrorMessage marginTop={0}>
+										Password must be at least 8 characters long.
+									</FormErrorMessage>
+								)}
+							</FormControl>
 
-				<CardFooter>
-					<p>
-						{isLogin ? "Don't have an account? " : "Already have an account? "}
-						<Link
-							href={isLogin ? "/signup" : "/login"}
-							className={classes.switchForm}
-						>
-							{isLogin ? "Create an account" : "Sign back in"}
-						</Link>
-					</p>
-				</CardFooter>
-			</Card>
+							{isLogin ? (
+								<> </>
+							) : (
+								<FormControl
+									isRequired
+									isInvalid={isErrorMatch}
+									marginBottom="24px"
+								>
+									<FormLabel requiredIndicator>Confirm Password</FormLabel>
+									<Input type="password" ref={confirmPasswordRef} />
+
+									<FormErrorMessage marginTop={0}>
+										Password do not match. Please try again.
+									</FormErrorMessage>
+								</FormControl>
+							)}
+							<Button variant="userAuthButton" type="submit">
+								{isLogin ? "Login" : "Create"}
+							</Button>
+
+							{registerSuccess === false ? (
+								<div>Email already registered. Please try another email.</div>
+							) : (
+								<></>
+							)}
+						</form>
+					</CardBody>
+
+					<CardFooter>
+						<p>
+							{isLogin
+								? "Don't have an account? "
+								: "Already have an account? "}
+							<Link
+								href={isLogin ? "/signup" : "/login"}
+								className={classes.switchForm}
+							>
+								{isLogin ? "Create an account" : "Sign back in"}
+							</Link>
+						</p>
+					</CardFooter>
+				</Card>
+			</div>
 		</div>
 	);
 }

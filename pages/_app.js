@@ -5,6 +5,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import theme from "/styles/theme/theme.jsx";
 import { UserContext } from "@/context/UserContext";
 import { useState, useMemo } from "react";
+import "../styles/globals.css";
 
 export default function App({ Component, pageProps }) {
 	const [user, setUser] = useState(UserContext);
@@ -23,7 +24,6 @@ export default function App({ Component, pageProps }) {
 								content="initial-scale=1.0, width=device-width"
 							/>
 						</Head>
-
 						<Component {...pageProps} />
 					</Layout>
 				</div>

@@ -20,8 +20,8 @@ function Header() {
 				classes.paddingTen,
 			].join(" ")}
 		>
-			<div className="flex">
-				<Image src="/svg/logo.svg" alt={"logo"} width={50} height={50} />
+			<div className={classes.flex}>
+				<Image src="/svg/logo.svg" alt={"logo"} width={35} height={35} />
 				<Link href="/login">
 					<Text fontSize="2xl" color="var(--list-bg-coffee)">
 						Simple Kanban
