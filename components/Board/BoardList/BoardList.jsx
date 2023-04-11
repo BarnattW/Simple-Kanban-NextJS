@@ -1,5 +1,6 @@
 import ListCard from "./Cards/ListCard";
 import { Droppable } from "react-beautiful-dnd";
+import classes from "./BoardList.module.css";
 
 function BoardList(props) {
 	return (
@@ -11,7 +12,7 @@ function BoardList(props) {
 			{(provided) => {
 				return (
 					<div
-						className="list"
+						className={classes.list}
 						ref={provided.innerRef}
 						{...provided.droppableProps}
 					>

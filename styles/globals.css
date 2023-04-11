@@ -11,6 +11,10 @@
   margin: 0;
 }
 
-body {
+html, body {
   background-color: var(--main-bg-coffee);
+}
+
+main {
+  flex-grow: 1;
 }

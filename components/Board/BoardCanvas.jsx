@@ -1,10 +1,18 @@
 import AddBoardList from "./BoardList/AddBoardList";
 import BoardList from "./BoardList/BoardList";
+import classes from "./BoardCanvas.module.css";
 
 //renders lists
 function BoardCanvas(props) {
 	return (
-		<div className="boardList flex flex-row overflow-y">
+		<div
+			className={[
+				classes.boardList,
+				classes.flex,
+				classes.flexRow,
+				classes.overflowY,
+			].join(" ")}
+		>
 			{props.listContent.map((listItem, index) => {
 				return (
 					<BoardList
@@ -20,7 +28,7 @@ function BoardCanvas(props) {
 					/>
 				);
 			})}
-			<div className="addList">
+			<div className={classes.addList}>
 				<AddBoardList onAdd={props.addListContent} />
 			</div>
 		</div>

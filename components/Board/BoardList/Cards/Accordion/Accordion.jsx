@@ -2,6 +2,7 @@ import { IconButton } from "@chakra-ui/react";
 import { TriangleDownIcon, DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import CreateNewUI from "../CreateNewUI";
+import classes from "./Accordion.module.css";
 
 function Accordion(props) {
 	const [isActive, setIsActive] = useState(true);
@@ -43,9 +44,9 @@ function Accordion(props) {
 					updateContent={editCards}
 				/>
 			) : (
-				<div className="cardContent">
-					<div className="flex">
-						<label className="cardTitle" style={{ overflow: "auto" }}>
+				<div className={classes.cardContent}>
+					<div className={classes.flex}>
+						<label className={classes.cardTitle} style={{ overflow: "auto" }}>
 							{props.cardTitle}
 						</label>
 						<IconButton
@@ -64,7 +65,7 @@ function Accordion(props) {
 							onClick={showContent}
 						></IconButton>
 					</div>
-					<div className={isActive ? "hidden" : ""}>
+					<div className={isActive ? `${classes.hidden}` : ""}>
 						<p style={{ marginLeft: "5px" }}>{props.cardContent}</p>
 					</div>
 				</div>

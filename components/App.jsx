@@ -2,7 +2,7 @@ import Board from "./Board/Board";
 import Footer from "./Footer";
 import Header from "./Header/Header";
 import Login from "./Login/Login";
-import NotFound from "./NotFound";
+import NotFound from "./NotFound/NotFound";
 import ViewBoards from "./ViewBoards/ViewBoards";
 import { SocketContext } from "./SocketContext";
 import { UserContext } from "../context/UserContext";

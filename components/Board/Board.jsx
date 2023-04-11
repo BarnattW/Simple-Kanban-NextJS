@@ -1,14 +1,13 @@
 import BoardCanvas from "./BoardCanvas";
 import BoardHeader from "./BoardHeader";
 import SideNavBar from "../SideNavBar/SideNavBar";
-import { SocketContext } from "../SocketContext";
 import { UserContext } from "../../context/UserContext";
 import { DragDropContext } from "react-beautiful-dnd";
 import { useContext, useEffect, useState } from "react";
+import classes from "./Board.module.css";
 
 function Board(props) {
 	const { user } = useContext(UserContext);
-	const socket = useContext(SocketContext);
 	const userID = user._id;
 	const [mongoID, setMongoID] = useState("");
 
@@ -55,35 +54,35 @@ function Board(props) {
 	}
 
 	//initially retrieves board data, then updates it
-	useEffect(() => {
-		function getBoard() {
-			const url = window.location.href;
-			const boardID = url.split("/");
+	// useEffect(() => {
+	// 	function getBoard() {
+	// 		const url = window.location.href;
+	// 		const boardID = url.split("/");
 
-			socket.emit("getBoard", userID, boardID[boardID.length - 1]);
-			socket.on("sendBoard", (result) => {
-				const user = result;
-				if (user) {
-					setListContent(user.userBoards[0].board);
-					setBoardTitle(user.userBoards[0].title);
-					setMongoID(user.userBoards[0]._id);
-				}
-			});
-		}
+	// 		socket.emit("getBoard", userID, boardID[boardID.length - 1]);
+	// 		socket.on("sendBoard", (result) => {
+	// 			const user = result;
+	// 			if (user) {
+	// 				setListContent(user.userBoards[0].board);
+	// 				setBoardTitle(user.userBoards[0].title);
+	// 				setMongoID(user.userBoards[0]._id);
+	// 			}
+	// 		});
+	// 	}
 
-		async function updateBoard() {
-			const editedBoard = {
-				title: boardTitle,
-				board: listContent,
-			};
-			socket.emit("updateBoard", userID, mongoID, editedBoard);
-		}
+	// 	async function updateBoard() {
+	// 		const editedBoard = {
+	// 			title: boardTitle,
+	// 			board: listContent,
+	// 		};
+	// 		socket.emit("updateBoard", userID, mongoID, editedBoard);
+	// 	}
 
-		if (mongoID === "") getBoard();
-		else updateBoard();
+	// 	if (mongoID === "") getBoard();
+	// 	else updateBoard();
 
-		return;
-	}, [listContent, boardTitle, mongoID, socket, userID]);
+	// 	return;
+	// }, [listContent, boardTitle, mongoID, userID]);
 
 	//drag and drop behavior when dragging cards
 	function dragEnd(result) {
@@ -122,22 +121,32 @@ function Board(props) {
 	}
 
 	return (
-		<div className="flex-grow flex-row overflow-y">
-			<SideNavBar logout={props.logout} />
-			<div className="canvas flex flex-column">
-				<BoardHeader
-					boardTitle={boardTitle}
-					updateBoardTitle={updateBoardTitle}
-				/>
-				<DragDropContext onDragEnd={dragEnd}>
-					<BoardCanvas
-						addListContent={addListContent}
-						deleteLists={deleteLists}
-						listContent={listContent}
-						updateCards={updateCards}
-						updateLists={updateLists}
+		<div className={[classes.flexColumn, classes.heightMax].join(" ")}>
+			<div
+				className={[classes.flexGrow, classes.flexRow, classes.overflowY].join(
+					" "
+				)}
+			>
+				<SideNavBar logout={props.logout} />
+				<div
+					className={[classes.canvas, classes.flex, classes.flexColumn].join(
+						" "
+					)}
+				>
+					<BoardHeader
+						boardTitle={boardTitle}
+						updateBoardTitle={updateBoardTitle}
 					/>
-				</DragDropContext>
+					<DragDropContext onDragEnd={dragEnd}>
+						<BoardCanvas
+							addListContent={addListContent}
+							deleteLists={deleteLists}
+							listContent={listContent}
+							updateCards={updateCards}
+							updateLists={updateLists}
+						/>
+					</DragDropContext>
+				</div>
 			</div>
 		</div>
 	);

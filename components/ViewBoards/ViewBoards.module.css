@@ -1,0 +1,18 @@
+.flex {
+    display: flex;
+    flex-grow: 1;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.overflowY {
+    overflow-y: auto;
+}
+
+.heightMax {
+    height: 100%;
+}

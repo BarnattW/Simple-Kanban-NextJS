@@ -1,0 +1,22 @@
+.flex {
+    display: flex;
+    flex-grow: 1;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.overflowY {
+    overflow-y: auto;
+}
+
+.boardList {
+    background-color: var(--main-bg-coffee);
+    margin-top: 10px;
+}
+
+.addList {
+    padding-left: 15px;
+}

@@ -1,0 +1,31 @@
+.flex {
+    display: flex;
+    flex-grow: 1;
+}
+
+.flexGrow {
+    flex-grow: 1;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.heightMax {
+    height: 100%;
+}
+
+.overflowY {
+    overflow-y: auto;
+}
+
+.canvas { 
+    background-color: var(--main-bg-coffee);
+}

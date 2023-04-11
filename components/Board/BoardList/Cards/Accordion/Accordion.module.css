@@ -1,0 +1,21 @@
+.flex {
+    display: flex;
+    flex-grow: 1;
+}
+
+.cardContent {
+    background-color:var(--card-bg-coffee);
+    border-radius:5px;
+    box-shadow:1px 2px 0 var(--main-bg-coffee);
+    margin-bottom:10px;
+}
+
+.cardTitle {
+    cursor: pointer;
+	flex-grow: 1;
+    margin: 5px 0 0 5px;
+}
+
+.hidden {
+    display: none;
+}

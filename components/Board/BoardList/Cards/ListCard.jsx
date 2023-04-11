@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { AddIcon, EditIcon } from "@chakra-ui/icons";
 import { useState } from "react";
+import classes from "./ListCard.module.css";
 
 function ListCard(props) {
 	const [toggleBool, setToggleBool] = useState(true);
@@ -62,11 +63,7 @@ function ListCard(props) {
 
 	//renders card contents
 	return (
-		<Card
-			width="300px"
-			backgroundColor="#e3d6c5"
-			maxHeight="85vh"
-		>
+		<Card width="300px" backgroundColor="#e3d6c5" maxHeight="85vh">
 			<CardHeader padding={3} paddingBottom={0}>
 				{editing ? (
 					<CreateNewUI
@@ -79,7 +76,7 @@ function ListCard(props) {
 					/>
 				) : (
 					<>
-						<div className="flex">
+						<div className={classes.flex}>
 							<Heading size="sm" variant="listCardHeading">
 								{props.listTitle}
 							</Heading>

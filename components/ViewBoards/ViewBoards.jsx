@@ -1,12 +1,12 @@
 import BoardDisplay from "./BoardDisplay";
 import SideNavBar from "../SideNavBar/SideNavBar";
-import { SocketContext } from "../SocketContext";
 import { UserContext } from "../../context/UserContext";
 import { useContext, useEffect, useState } from "react";
+import classes from "./ViewBoards.module.css";
 
 function ViewBoards(props) {
 	const { user } = useContext(UserContext);
-	const socket = useContext(SocketContext);
+
 	const userID = user._id;
 
 	const [userBoards, setUserBoards] = useState([]);
@@ -14,18 +14,18 @@ function ViewBoards(props) {
 	const [createBoard, setCreateBoard] = useState(false);
 
 	//retrieves user's board onload
-	useEffect(() => {
-		async function getUserBoards() {
-			socket.emit("retreiveBoards", userID);
-			socket.on("sendBoards", (result) => {
-				const user = result;
-				setUserBoards(user.userBoards);
-			});
-		}
-		getUserBoards();
+	// useEffect(() => {
+	// 	async function getUserBoards() {
+	// 		socket.emit("retreiveBoards", userID);
+	// 		socket.on("sendBoards", (result) => {
+	// 			const user = result;
+	// 			setUserBoards(user.userBoards);
+	// 		});
+	// 	}
+	// 	getUserBoards();
 
-		return;
-	}, [createBoard, socket, userID]);
+	// 	return;
+	// }, [createBoard, socket, userID]);
 
 	//creates a new board by sending a request to server
 	function createNewBoard(boardtitle) {
@@ -50,13 +50,15 @@ function ViewBoards(props) {
 	}
 
 	return (
-		<div className="flex overflow-y">
-			<SideNavBar logout={props.logout} />
-			<BoardDisplay
-				createNewBoard={createNewBoard}
-				deleteBoard={deleteBoard}
-				userBoards={userBoards}
-			/>
+		<div className={[classes.flexColumn, classes.heightMax].join(" ")}>
+			<div className={[classes.flex, classes.overflowY].join(" ")}>
+				<SideNavBar logout={props.logout} />
+				<BoardDisplay
+					createNewBoard={createNewBoard}
+					deleteBoard={deleteBoard}
+					userBoards={userBoards}
+				/>
+			</div>
 		</div>
 	);
 }

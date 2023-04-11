@@ -1,6 +1,7 @@
 import AlertDialogues from "../../AlertDialogues/AlertDialogues";
-import { Card, CardBody, Text, Image } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Card, CardBody, Text } from "@chakra-ui/react";
+import Link from "next/link";
+import Image from "next/image";
 
 function DisplayCard(props) {
 	//pass id to boardDisplay to delete a board
@@ -10,7 +11,7 @@ function DisplayCard(props) {
 
 	return (
 		<Card backgroundColor="var(--card-bg-coffee)" maxW="300px" maxH="200px">
-			<Link to={`/board/${props.board._id}`}>
+			<Link href={`/board/${props.board._id}`}>
 				<CardBody display="flex" justifyContent="center" padding="0">
 					<Text variant="boardDisplayTitle">{props.board.title}</Text>
 					<Image src="svg/layered-waves-haikei.svg" borderRadius={5}></Image>

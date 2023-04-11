@@ -1,15 +1,26 @@
 import DisplayCard from "./DisplayCard/DisplayCard";
 import PopoverForm from "./DisplayCard/PopoverForm/PopoverForm";
-import { Text, Heading, Card, CardBody, Image } from "@chakra-ui/react";
+import { Text, Heading, Card, CardBody } from "@chakra-ui/react";
+import Image from "next/image";
+import classes from "./BoardDisplay.module.css";
 
 function BoardDisplay(props) {
 	return (
-		<div className="flex-column flex-grow padding-thirty userBoardsContainer">
-			<div className="padding-thirty userBoardsDisplay">
+		<div
+			className={[
+				classes.flexColumn,
+				classes.flexGrow,
+				classes.paddingThirty,
+				classes.userBoardsContainer,
+			].join(" ")}
+		>
+			<div
+				className={[classes.paddingThirty, classes.userBoardsDisplay].join(" ")}
+			>
 				<Heading variant="displayHeading" size="md">
 					Your Boards
 				</Heading>
-				<div className="grid">
+				<div className={classes.grid}>
 					{props.userBoards.map((board, index) => {
 						return (
 							<div key={index}>
@@ -24,8 +35,11 @@ function BoardDisplay(props) {
 							</Text>
 							<Image
 								src="svg/layered-waves-haikei.svg"
-								borderRadius={5}
-							></Image>
+								alt="background"
+								height={300}
+								width={300}
+								className={classes.cardImage}
+							/>
 							<PopoverForm createNewBoard={props.createNewBoard} />
 						</CardBody>
 					</Card>

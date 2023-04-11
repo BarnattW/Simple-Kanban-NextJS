@@ -1,0 +1,8 @@
+.center {
+    height: 80%; 
+    margin: auto; 
+    text-align: center; 
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
