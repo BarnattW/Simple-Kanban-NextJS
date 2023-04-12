@@ -97,6 +97,7 @@ function Login(props) {
 			if (data.success) {
 				setRegisterSuccess(data.success);
 				console.log(data);
+				login(event);
 			} else {
 				console.log(data);
 				throw new Error(data.message || "Something went wrong");
