@@ -12,7 +12,7 @@ function DisplayCard(props) {
 
 	return (
 		<Card backgroundColor="var(--card-bg-coffee)" maxW="300px" maxH="200px">
-			<Link href={`/board/${props.board._id}`}>
+			<Link href={`/boards/${props.board._id}`}>
 				<CardBody display="flex" justifyContent="center" padding="0">
 					<Text variant="boardDisplayTitle">{props.board.title}</Text>
 					<Image

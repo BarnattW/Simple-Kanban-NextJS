@@ -6,10 +6,13 @@ import { DragDropContext } from "react-beautiful-dnd";
 import { useContext, useEffect, useState } from "react";
 import classes from "./Board.module.css";
 
+import { useSession } from "next-auth/react";
+
 function Board(props) {
 	const { user } = useContext(UserContext);
 	const userID = user._id;
 	const [mongoID, setMongoID] = useState("");
+	const { data: session, status } = useSession();
 
 	//stores an array that renders the lists and cards
 	const [listContent, setListContent] = useState([]);
@@ -54,35 +57,54 @@ function Board(props) {
 	}
 
 	//initially retrieves board data, then updates it
-	// useEffect(() => {
-	// 	function getBoard() {
-	// 		const url = window.location.href;
-	// 		const boardID = url.split("/");
+	useEffect(() => {
+		async function getBoard() {
+			const url = window.location.href;
+			const boardID = url.split("/");
 
-	// 		socket.emit("getBoard", userID, boardID[boardID.length - 1]);
-	// 		socket.on("sendBoard", (result) => {
-	// 			const user = result;
-	// 			if (user) {
-	// 				setListContent(user.userBoards[0].board);
-	// 				setBoardTitle(user.userBoards[0].title);
-	// 				setMongoID(user.userBoards[0]._id);
-	// 			}
-	// 		});
-	// 	}
+			const response = await fetch("/api/user/getBoard", {
+				method: "POST",
+				body: JSON.stringify({
+					username: session.user.username,
+					boardID: boardID[boardID.length - 1],
+				}),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
 
-	// 	async function updateBoard() {
-	// 		const editedBoard = {
-	// 			title: boardTitle,
-	// 			board: listContent,
-	// 		};
-	// 		socket.emit("updateBoard", userID, mongoID, editedBoard);
-	// 	}
+			const userData = await response.json();
+			if (userData) {
+				setListContent(userData.userBoards[0].board);
+				setBoardTitle(userData.userBoards[0].title);
+				setMongoID(userData.userBoards[0]._id);
+			}
+		}
 
-	// 	if (mongoID === "") getBoard();
-	// 	else updateBoard();
+		async function updateBoard() {
+			const editedBoard = {
+				title: boardTitle,
+				board: listContent,
+			};
 
-	// 	return;
-	// }, [listContent, boardTitle, mongoID, userID]);
+			const response = await fetch("/api/user/updateBoard", {
+				method: "POST",
+				body: JSON.stringify({
+					username: session.user.username,
+					boardID: mongoID,
+					editedBoard: editedBoard,
+				}),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+		}
+
+		if (mongoID === "") getBoard();
+		else updateBoard();
+
+		return;
+	}, [listContent, boardTitle, mongoID, userID, user, session]);
 
 	//drag and drop behavior when dragging cards
 	function dragEnd(result) {

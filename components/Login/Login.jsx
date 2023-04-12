@@ -62,7 +62,8 @@ function Login(props) {
 			setAuthSuccess(true);
 			//if auth is successful, fetch user data
 			const response = await fetch(`/api/user/${session.user.username}`, {
-				method: "GET",
+				method: "POST",
+				body: JSON.stringify({ username: session.user.username }),
 				headers: {
 					"Content-Type": "application/json",
 				},

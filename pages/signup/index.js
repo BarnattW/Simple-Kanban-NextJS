@@ -1,6 +1,8 @@
 import Login from "@/components/Login/Login";
 import Head from "next/head";
 
+import { getSession } from "next-auth/react";
+
 export default function SignupPage() {
 	return (
 		<>
@@ -13,4 +15,19 @@ export default function SignupPage() {
 			<Login type="signup" />
 		</>
 	);
+}
+
+export async function getServerSideProps(context) {
+	const session = await getSession({ req: context.req });
+
+	if (!session) {
+		return { props: {} };
+	}
+
+	return {
+		props: { session },
+		redirect: {
+			destination: "/boards",
+		},
+	};
 }
