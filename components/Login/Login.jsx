@@ -60,17 +60,6 @@ function Login(props) {
 
 		if (auth.status != 401) {
 			setAuthSuccess(true);
-			//if auth is successful, fetch user data
-			const response = await fetch(`/api/user/${session.user.username}`, {
-				method: "POST",
-				body: JSON.stringify({ username: session.user.username }),
-				headers: {
-					"Content-Type": "application/json",
-				},
-			});
-			const userData = await response.json();
-			console.log(userData);
-			setUser(userData);
 			setIsError(false);
 			router.push("/boards");
 		} else {
@@ -126,6 +115,7 @@ function Login(props) {
 				height={300}
 				width={150}
 				position="relative"
+				priority={true}
 			></Image>
 
 			<Card
