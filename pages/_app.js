@@ -31,6 +31,7 @@ export default function App({
 									name="viewport"
 									content="initial-scale=1.0, width=device-width"
 								/>
+								<link rel="shortcut icon" href="/svg/logo.svg"></link>
 							</Head>
 							<Component {...pageProps} />
 						</Layout>
