@@ -8,7 +8,7 @@ password: 123456789
 So why did I choose Next.js? 
 1. Core features: directory based routing and built in server components 
 2. Ease of adoption from React, and the fact that I wanted to learn a full stack framework 
-3. Experiment 
+3. Experimentation Purposes 
 
 I plan to add continue working on this application and maybe port it into mobile. \
 As per a suggestion, there are also plans to transform this application into a all-in-one productivity app \
