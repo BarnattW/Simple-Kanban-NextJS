@@ -8,7 +8,6 @@ import classes from "./Header.module.css";
 function Header() {
 	//const { user } = useContext(UserContext);
 	const user = { "._id": null };
-	console.log(user._id);
 
 	return (
 		<div

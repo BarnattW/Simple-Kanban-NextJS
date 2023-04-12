@@ -1,16 +1,29 @@
 import { IconButton, Text } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import classes from "./SideNavBar.module.css";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
+import { UserContext } from "@/context/UserContext";
 
 function SideBar(props) {
 	const [navActive, setNavActive] = useState(false);
+	const router = useRouter();
+	const { setUser } = useContext(UserContext);
 
 	function toggleNav() {
 		setNavActive((prevBool) => {
 			return !prevBool;
 		});
+	}
+
+	const { data: session, status } = useSession();
+	//logout user and resets user context
+	async function logoutHandler() {
+		await signOut();
+		setUser({});
+		router.push("/login");
 	}
 
 	return (
@@ -44,7 +57,7 @@ function SideBar(props) {
 							<Text variant="navItem">Settings</Text>
 						</li>
 						<li>
-							<Text variant="navItem" onClick={props.logout}>
+							<Text variant="navItem" onClick={logoutHandler}>
 								Logout
 							</Text>
 						</li>

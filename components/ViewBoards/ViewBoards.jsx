@@ -3,37 +3,59 @@ import SideNavBar from "../SideNavBar/SideNavBar";
 import { UserContext } from "../../context/UserContext";
 import { useContext, useEffect, useState } from "react";
 import classes from "./ViewBoards.module.css";
+import { useSession, getSession } from "next-auth/react";
 
 function ViewBoards(props) {
 	const { user } = useContext(UserContext);
-
-	const userID = user._id;
 
 	const [userBoards, setUserBoards] = useState([]);
 	//createBoard is used to trigger useEffect when a new board is made
 	const [createBoard, setCreateBoard] = useState(false);
 
-	//retrieves user's board onload
-	// useEffect(() => {
-	// 	async function getUserBoards() {
-	// 		socket.emit("retreiveBoards", userID);
-	// 		socket.on("sendBoards", (result) => {
-	// 			const user = result;
-	// 			setUserBoards(user.userBoards);
-	// 		});
-	// 	}
-	// 	getUserBoards();
+	const [isLoading, setIsLoading] = useState(true);
+	const { data: session, status } = useSession();
+	const userID = session.user.username;
 
-	// 	return;
-	// }, [createBoard, socket, userID]);
+	//retrieves user's board onload
+	useEffect(() => {
+		async function getUserBoards() {
+			const response = await fetch(`/api/user/${userID}`, {
+				method: "POST",
+				body: JSON.stringify({ username: session.user.username }),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+			const userData = await response.json();
+
+			if (response.status != 201) {
+				return;
+			}
+			setUserBoards(userData.userBoards);
+		}
+		if (user.username) {
+			setUserBoards(user.userBoards);
+			return;
+		}
+		getUserBoards();
+
+		return;
+	}, [createBoard, userID, session, user]);
 
 	//creates a new board by sending a request to server
-	function createNewBoard(boardtitle) {
+	async function createNewBoard(boardtitle) {
 		const newBoard = {
-			_id: userID,
+			username: userID,
 			title: boardtitle,
 		};
-		socket.emit("createBoard", newBoard);
+
+		await fetch("/api/user/createBoard", {
+			method: "POST",
+			body: JSON.stringify(newBoard),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
 
 		setCreateBoard((prevBool) => {
 			return !prevBool;
@@ -41,8 +63,19 @@ function ViewBoards(props) {
 	}
 
 	//deletes a board by sending a request to server
-	function deleteBoard(mongoID) {
-		socket.emit("deleteBoard", userID, mongoID);
+	async function deleteBoard(mongoID) {
+		const deleteBoard = {
+			username: userID,
+			boardID: mongoID,
+		};
+
+		await fetch("/api/user/deleteBoard", {
+			method: "POST",
+			body: JSON.stringify(deleteBoard),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		});
 
 		setCreateBoard((prevBool) => {
 			return !prevBool;

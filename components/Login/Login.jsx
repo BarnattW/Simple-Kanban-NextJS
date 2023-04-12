@@ -19,6 +19,8 @@ import { useContext, useRef, useState } from "react";
 import classes from "./Login.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { useSession, signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 function Login(props) {
 	//used to toggle elements in login and register
@@ -29,6 +31,7 @@ function Login(props) {
 	const handleClick = () => setShow(!show);
 
 	//auth params
+	const router = useRouter();
 	const usernameRef = useRef();
 	const passwordRef = useRef();
 	const confirmPasswordRef = useRef();
@@ -40,6 +43,7 @@ function Login(props) {
 	const [registerSuccess, setRegisterSuccess] = useState();
 
 	const { setUser } = useContext(UserContext);
+	const { data: session, status } = useSession();
 
 	//logins user by sending a request to server
 	async function login(event) {
@@ -47,41 +51,27 @@ function Login(props) {
 
 		const user = usernameRef.current.value;
 		const pass = passwordRef.current.value;
-		const userLogin = {
+
+		const auth = await signIn("credentials", {
+			redirect: false,
 			username: user,
 			password: pass,
-		};
-		const auth = await fetch(`/api/user/login`, {
-			method: "POST",
-			body: JSON.stringify(userLogin),
-			credentials: "include",
-			withCredentials: true,
-			headers: {
-				Accept: "application/json",
-				"Content-Type": "application/json",
-			},
 		});
-		const authRes = await auth.json();
-		setAuthSuccess(authRes.success);
 
-		//if auth is successful, fetch user data
-		if (authRes.success) {
-			await fetch(`/api/user/get`, {
+		if (auth.status != 401) {
+			setAuthSuccess(true);
+			//if auth is successful, fetch user data
+			const response = await fetch(`/api/user/${session.user.username}`, {
 				method: "GET",
-				credentials: "include",
-				withCredentials: true,
 				headers: {
 					"Content-Type": "application/json",
 				},
-			})
-				.then((response) => {
-					return response.json();
-				})
-				.then((jsonData) => {
-					setUser(jsonData);
-					setIsError(false);
-					navigate("/boards");
-				});
+			});
+			const userData = await response.json();
+			console.log(userData);
+			setUser(userData);
+			setIsError(false);
+			router.push("/boards");
 		} else {
 			setIsError(true);
 		}
@@ -105,7 +95,7 @@ function Login(props) {
 				password: pass,
 			};
 
-			const response = await fetch(`/api/user/signup`, {
+			const response = await fetch(`/api/auth/signup`, {
 				method: "POST",
 				body: JSON.stringify(userSignup),
 				headers: {

@@ -20,6 +20,12 @@ async function handler(req, res) {
 		return;
 	}
 
+	const existingUser = await User.findOne({ username: username });
+	if (existingUser) {
+		res.status(422).json({ message: "User exists already", success: false });
+		return;
+	}
+
 	const hashedPassword = await hashPassword(password);
 	try {
 		const response = await User.create({

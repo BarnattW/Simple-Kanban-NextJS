@@ -8,6 +8,7 @@ import { SocketContext } from "./SocketContext";
 import { UserContext } from "../context/UserContext";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useMemo, useState } from "react";
+import { SessionProvider } from "next-auth/react";
 
 function App() {
 	const navigate = useNavigate();
@@ -37,30 +38,7 @@ function App() {
 			}
 		}
 		getUserBoards();
-
-		socket.on("connect", () => {
-			setIsConnected(true);
-		});
-		socket.on("disconnect", () => {
-			setIsConnected(false);
-		});
-		return () => {
-			socket.off("connect");
-			socket.off("disconnect");
-		};
 	}, [isConnected, socket]);
-
-	//logout user and resets user context
-	async function logout() {
-		await fetch(`http://localhost:5000/user/logout`, {
-			method: "GET",
-			credentials: "include",
-			withCredentials: true,
-		})
-		setUser({});
-		navigate("/login");
-		
-	}
 
 	return (
 		<SocketContext.Provider value={socket}>
