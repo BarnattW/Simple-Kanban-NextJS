@@ -51,7 +51,7 @@ function Login(props) {
 			username: user,
 			password: pass,
 		};
-		const auth = await fetch(`http://localhost:5000/user/login`, {
+		const auth = await fetch(`/api/user/login`, {
 			method: "POST",
 			body: JSON.stringify(userLogin),
 			credentials: "include",
@@ -66,7 +66,7 @@ function Login(props) {
 
 		//if auth is successful, fetch user data
 		if (authRes.success) {
-			await fetch(`http://localhost:5000/user/get`, {
+			await fetch(`/api/user/get`, {
 				method: "GET",
 				credentials: "include",
 				withCredentials: true,
@@ -104,27 +104,25 @@ function Login(props) {
 				username: user,
 				password: pass,
 			};
-			await fetch(`http://localhost:5000/user/register`, {
+
+			const response = await fetch(`/api/user/signup`, {
 				method: "POST",
-				credentials: "include",
-				withCredentials: true,
 				body: JSON.stringify(userSignup),
 				headers: {
 					"Content-Type": "application/json",
-					Accept: "application/json",
-					"Access-Control-Allow-Origin": "http://localhost:3000/",
 				},
-			})
-				.then((response) => {
-					return response.json();
-				})
-				.then((successData) => {
-					if (successData.success) {
-						setRegisterSuccess(successData.success);
-						login(event);
-						navigate("/boards");
-					}
-				});
+			});
+
+			const data = await response.json();
+			if (data.success) {
+				setRegisterSuccess(data.success);
+				console.log(data);
+			} else {
+				console.log(data);
+				throw new Error(data.message || "Something went wrong");
+			}
+
+			return data;
 		}
 	}
 
