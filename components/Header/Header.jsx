@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Text, Button } from "@chakra-ui/react";
 import classes from "./Header.module.css";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 
 function Header() {
 	const { data: session, status } = useSession();
