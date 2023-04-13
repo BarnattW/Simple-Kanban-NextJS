@@ -1,13 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
-//import { UserContext } from "./UserContext";
 import { Text, Button } from "@chakra-ui/react";
-import { useContext } from "react";
 import classes from "./Header.module.css";
+import { useSession } from "next-auth/react";
 
 function Header() {
-	//const { user } = useContext(UserContext);
-	const user = { "._id": null };
+	const { data: session, status } = useSession();
+
+	async function logoutHandler() {
+		await signOut();
+		router.push("/login");
+	}
 
 	return (
 		<div
@@ -28,8 +31,13 @@ function Header() {
 				</Link>
 			</div>
 			<div>
-				{user._id ? (
-					<></>
+				{session ? (
+					<>
+						<Button variant="headerAccountButton" onClick={logoutHandler}>
+							Logout
+						</Button>
+						<span className={classes.paddingTen}></span>
+					</>
 				) : (
 					<>
 						<Link href="/login">
