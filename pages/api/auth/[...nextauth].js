@@ -5,7 +5,7 @@ import User from "@/lib/model/user";
 import { verifyPassword } from "@/lib/auth";
 
 export default NextAuth({
-	secret: process.env.SECRET,
+	secret: process.env.NEXTAUTH_SECRET,
 	session: {
 		jwt: true,
 	},
