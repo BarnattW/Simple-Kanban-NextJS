@@ -6,7 +6,7 @@ user: a@gmail.com \
 password: 123456789 
 
 So why did I choose Next.js? 
-1. Core features: directory based routing and built in server components 
+1. Core features: directory based routing, server-side rendering, and built in server components 
 2. Ease of adoption from React, and the fact that I wanted to learn a full stack framework 
 3. Experimentation Purposes 
 
