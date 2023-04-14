@@ -22,7 +22,6 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
 function Login(props) {
-	console.log("dog");
 	//used to toggle elements in login and register
 	const isLogin = props.type === "login" ? true : false;
 	//toggles between hidden and text password
