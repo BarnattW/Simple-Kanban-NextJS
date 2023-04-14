@@ -1,4 +1,3 @@
-import { UserContext } from "../../context/UserContext";
 import {
 	Card,
 	CardHeader,
@@ -15,20 +14,19 @@ import {
 	FormErrorMessage,
 } from "@chakra-ui/react";
 import { ViewIcon } from "@chakra-ui/icons";
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import classes from "./Login.module.css";
 import Link from "next/link";
 import Image from "next/image";
-import { useSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
 function Login(props) {
 	//used to toggle elements in login and register
 	const isLogin = props.type === "login" ? true : false;
-
 	//toggles between hidden and text password
-	const [show, setShow] = useState(false);
-	const handleClick = () => setShow(!show);
+	const [showPassword, setShowPassword] = useState(false);
+	const handleClick = () => setShowPassword(!showPassword);
 
 	//auth params
 	const router = useRouter();
@@ -39,11 +37,12 @@ function Login(props) {
 	//toggles form errors
 	const [isError, setIsError] = useState(false);
 	const [isErrorMatch, setIsErrorMatch] = useState(false);
-	const [authSuccess, setAuthSuccess] = useState();
+	const [authSuccess, setAuthSuccess] = useState(true);
 	const [registerSuccess, setRegisterSuccess] = useState();
 
-	const { setUser } = useContext(UserContext);
-	const { data: session, status } = useSession();
+	function registerSuccessHandler() {
+		if (registerSuccess == false) setRegisterSuccess(true);
+	}
 
 	//logins user by sending a request to server
 	async function login(event) {
@@ -57,13 +56,10 @@ function Login(props) {
 			username: user,
 			password: pass,
 		});
-
-		if (auth.status != 401) {
-			setAuthSuccess(true);
-			setIsError(false);
-			router.push("/boards");
+		if (auth.status == 401) {
+			setAuthSuccess(false);
 		} else {
-			setIsError(true);
+			router.push("/boards");
 		}
 	}
 
@@ -80,6 +76,8 @@ function Login(props) {
 		} else if (confirmPass !== pass) {
 			setIsErrorMatch(true);
 		} else {
+			setIsError(false);
+			setIsErrorMatch(false);
 			const userSignup = {
 				username: user,
 				password: pass,
@@ -95,12 +93,9 @@ function Login(props) {
 
 			const data = await response.json();
 			if (data.success) {
-				setRegisterSuccess(data.success);
-				console.log(data);
 				login(event);
 			} else {
-				console.log(data);
-				throw new Error(data.message || "Something went wrong");
+				setRegisterSuccess(false);
 			}
 
 			return data;
@@ -137,7 +132,11 @@ function Login(props) {
 					<form onSubmit={isLogin ? login : signup}>
 						<FormControl isRequired marginBottom="24px">
 							<FormLabel requiredIndicator>Email</FormLabel>
-							<Input type="email" ref={usernameRef} />
+							<Input
+								type="email"
+								ref={usernameRef}
+								onChange={registerSuccessHandler}
+							/>
 						</FormControl>
 
 						<FormControl isRequired isInvalid={isError} marginBottom="24px">
@@ -145,7 +144,10 @@ function Login(props) {
 								{isLogin ? "Password" : "Password (min. 8 characters)"}
 							</FormLabel>
 							<InputGroup maxW="450px">
-								<Input type={show ? "text" : "password"} ref={passwordRef} />
+								<Input
+									type={showPassword ? "text" : "password"}
+									ref={passwordRef}
+								/>
 								<InputRightElement>
 									<IconButton
 										icon={<ViewIcon />}
@@ -154,7 +156,7 @@ function Login(props) {
 									></IconButton>
 								</InputRightElement>
 							</InputGroup>
-							{authSuccess === false && isLogin ? (
+							{authSuccess == false && isLogin ? (
 								<FormErrorMessage marginTop={0}>
 									Invalid password or email. Please try again.
 								</FormErrorMessage>

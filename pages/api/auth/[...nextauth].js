@@ -26,7 +26,7 @@ export default NextAuth({
 					throw new Error("Invalid password");
 				}
 
-				return { username: user.username };
+				return { username: user.username, id: user._id };
 			},
 		}),
 	],

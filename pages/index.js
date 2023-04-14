@@ -1,6 +1,4 @@
-import styles from "@/styles/Home.module.css";
 import Login from "../components/Login/Login.jsx";
-import BoardDisplay from "@/components/ViewBoards/BoardDisplay.jsx";
 
 import { getSession } from "next-auth/react";
 
@@ -25,7 +23,7 @@ export async function getServerSideProps(context) {
 	}
 
 	return {
-		props: { session },
+		props: {},
 		redirect: {
 			destination: "/boards",
 		},

@@ -2,11 +2,6 @@ import { defineStyleConfig } from "@chakra-ui/react";
 
 const Button = defineStyleConfig({
 	baseStyle: {},
-
-	sizes: {
-		sm: {},
-		md: {},
-	},
 	variants: {
 		//default buttion types
 		solid: {

@@ -1,16 +1,12 @@
 import BoardCanvas from "./BoardCanvas";
 import BoardHeader from "./BoardHeader";
 import SideNavBar from "../SideNavBar/SideNavBar";
-import { UserContext } from "../../context/UserContext";
 import { DragDropContext } from "react-beautiful-dnd";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import classes from "./Board.module.css";
-
 import { useSession } from "next-auth/react";
 
 function Board(props) {
-	const { user } = useContext(UserContext);
-	const userID = user._id;
 	const [mongoID, setMongoID] = useState("");
 	const { data: session, status } = useSession();
 
@@ -65,7 +61,7 @@ function Board(props) {
 			const response = await fetch("/api/user/getBoard", {
 				method: "POST",
 				body: JSON.stringify({
-					username: session.user.username,
+					id: session.user.id,
 					boardID: boardID[boardID.length - 1],
 				}),
 				headers: {
@@ -74,10 +70,11 @@ function Board(props) {
 			});
 
 			const userData = await response.json();
-			if (userData) {
+			if (response.status != 422) {
 				setListContent(userData.userBoards[0].board);
 				setBoardTitle(userData.userBoards[0].title);
 				setMongoID(userData.userBoards[0]._id);
+			} else {
 			}
 		}
 
@@ -90,7 +87,7 @@ function Board(props) {
 			const response = await fetch("/api/user/updateBoard", {
 				method: "POST",
 				body: JSON.stringify({
-					username: session.user.username,
+					id: session.user.id,
 					boardID: mongoID,
 					editedBoard: editedBoard,
 				}),
@@ -104,7 +101,7 @@ function Board(props) {
 		else updateBoard();
 
 		return;
-	}, [listContent, boardTitle, mongoID, userID, user, session]);
+	}, [listContent, boardTitle, mongoID, session]);
 
 	//drag and drop behavior when dragging cards
 	function dragEnd(result) {
