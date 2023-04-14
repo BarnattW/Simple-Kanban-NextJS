@@ -13,3 +13,7 @@ So why did I choose Next.js?
 I plan to add continue working on this application and maybe port it into mobile. \
 As per a suggestion, there are also plans to transform this application into a all-in-one productivity app \
 with features such as a pomodoro timer, calendars, and more. I look forward to working on it.
+
+Some issues with the project: 
+1. The UI framework used, Chakra UI, overrides css modules, thus making the initial load long since Chakra's css themes have to be imported first.
+2. I have yet to include other authentication providers, such as Google.
