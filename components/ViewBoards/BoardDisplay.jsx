@@ -3,7 +3,7 @@ import PopoverForm from "./DisplayCard/PopoverForm/PopoverForm";
 import { Text, Heading, Card, CardBody } from "@chakra-ui/react";
 import Image from "next/image";
 import classes from "./BoardDisplay.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 
 function BoardDisplay(props) {

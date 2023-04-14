@@ -4,11 +4,9 @@ import Link from "next/link";
 import { useState } from "react";
 import classes from "./SideNavBar.module.css";
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/router";
 
 function SideBar(props) {
 	const [navActive, setNavActive] = useState(false);
-	const router = useRouter();
 
 	function toggleNav() {
 		setNavActive((prevBool) => {
@@ -19,7 +17,6 @@ function SideBar(props) {
 	//logout user and resets user context
 	async function logoutHandler() {
 		await signOut();
-		router.push("/login");
 	}
 
 	return (

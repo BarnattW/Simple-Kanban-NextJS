@@ -22,6 +22,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
 function Login(props) {
+	console.log("dog");
 	//used to toggle elements in login and register
 	const isLogin = props.type === "login" ? true : false;
 	//toggles between hidden and text password
@@ -44,6 +45,14 @@ function Login(props) {
 		if (registerSuccess == false) setRegisterSuccess(true);
 	}
 
+	function isErrorHandler() {
+		if (isError == true) setIsError(false);
+	}
+
+	function isErrorMatchHandler() {
+		if (isErrorMatch == true) setIsErrorMatch(false);
+	}
+
 	//logins user by sending a request to server
 	async function login(event) {
 		event.preventDefault();
@@ -58,6 +67,7 @@ function Login(props) {
 		});
 		if (auth.status == 401) {
 			setAuthSuccess(false);
+			setIsError(true);
 		} else {
 			router.push("/boards");
 		}
@@ -76,8 +86,6 @@ function Login(props) {
 		} else if (confirmPass !== pass) {
 			setIsErrorMatch(true);
 		} else {
-			setIsError(false);
-			setIsErrorMatch(false);
 			const userSignup = {
 				username: user,
 				password: pass,
@@ -135,7 +143,7 @@ function Login(props) {
 							<Input
 								type="email"
 								ref={usernameRef}
-								onChange={registerSuccessHandler}
+								onChange={isLogin ? isErrorHandler : registerSuccessHandler}
 							/>
 						</FormControl>
 
@@ -147,6 +155,7 @@ function Login(props) {
 								<Input
 									type={showPassword ? "text" : "password"}
 									ref={passwordRef}
+									onChange={isErrorHandler}
 								/>
 								<InputRightElement>
 									<IconButton
@@ -181,7 +190,11 @@ function Login(props) {
 								marginBottom="24px"
 							>
 								<FormLabel requiredIndicator>Confirm Password</FormLabel>
-								<Input type="password" ref={confirmPasswordRef} />
+								<Input
+									type="password"
+									ref={confirmPasswordRef}
+									onChange={isErrorMatchHandler}
+								/>
 
 								<FormErrorMessage marginTop={0}>
 									Password do not match. Please try again.

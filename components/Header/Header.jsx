@@ -9,7 +9,6 @@ function Header() {
 
 	async function logoutHandler() {
 		await signOut();
-		router.push("/login");
 	}
 
 	return (
