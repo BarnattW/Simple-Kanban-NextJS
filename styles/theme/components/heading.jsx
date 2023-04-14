@@ -20,8 +20,6 @@ const Heading = defineStyleConfig({
 			marginTop: "2",
 			overflow: "auto",
 		},
-		//404 page
-		errorHeading: { color: "#FFF8EA", paddingBottom: "5px" },
 	},
 
 	defaultProps: {
