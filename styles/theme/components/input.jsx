@@ -30,31 +30,8 @@ const variantFormInput = definePartsStyle(() => {
 	};
 });
 
-// Board title variant
-const variantTitleInput = definePartsStyle(() => {
-	return {
-		field: {
-			border: "1px solid",
-			borderColor: "#e3d6c5",
-			bg: "inherit",
-			color: "#FFF8EA",
-			fontSize: "30px",
-			fontWeight:"bold",
-			marginLeft:"15px", 
-			maxW: "300px",
-			_hover: {
-				borderColor: "#594545",
-			},
-			_focusVisible: {
-				borderColor: "#594545",
-			},
-		},
-	};
-});
-
 const variants = {
 	formInput: variantFormInput,
-	titleInput: variantTitleInput,
 };
 
 const size = {

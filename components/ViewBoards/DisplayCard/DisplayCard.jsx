@@ -14,7 +14,16 @@ function DisplayCard(props) {
 		<Card backgroundColor="var(--card-bg-coffee)" maxW="300px" maxH="200px">
 			<Link href={`/boards/${props.board._id}`}>
 				<CardBody display="flex" justifyContent="center" padding="0">
-					<Text variant="boardDisplayTitle">{props.board.title}</Text>
+					<Text
+						color="#815B5B"
+						fontWeight="bold"
+						fontSize="20px"
+						marginTop="10px"
+						position="absolute"
+						textAlign="center"
+					>
+						{props.board.title}
+					</Text>
 					<Image
 						src="svg/layered-waves-haikei.svg"
 						alt="background"

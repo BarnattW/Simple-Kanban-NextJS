@@ -13,18 +13,8 @@ const Text = defineStyleConfig({
 		navItem: {
 			color: "#FFF8EA",
 			fontSize: "lg",
-			_hover: { color: "#815B5B", bg: "#FFF8EA" },
+			_hover: { color: "#815B5B", bg: "#FFF8EA", cursor: "pointer" },
 			padding: "5% 0 5% 8%",
-		},
-
-		//ViewBoards
-		boardDisplayTitle: {
-			color: "#815B5B",
-			fontWeight: "bold",
-			fontSize: "20px",
-			marginTop: "10px",
-			position: "absolute",
-			textAlign: "center",
 		},
 	},
 

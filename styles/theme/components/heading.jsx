@@ -8,13 +8,6 @@ const Heading = defineStyleConfig({
 		md: {},
 	},
 	variants: {
-		//Header
-		boardHeading: {
-			color: "#FFF8EA",
-			marginLeft: "30px",
-			paddingTop: "1%",
-			_hover: { cursor: "pointer" },
-		},
 		//viewBoards
 		displayHeading: {
 			color: "#594545",

@@ -32,7 +32,15 @@ function Header() {
 			<div>
 				{session ? (
 					<>
-						<Button variant="headerAccountButton" onClick={logoutHandler}>
+						<Button
+							width="80px"
+							borderRadius="30px"
+							bg="#FFF8EA"
+							color="#815B5B"
+							_hover={{ backgroundColor: "#e3d6c5" }}
+							fontSize="15px"
+							onClick={logoutHandler}
+						>
 							Logout
 						</Button>
 						<span className={classes.paddingTen}></span>
@@ -40,7 +48,16 @@ function Header() {
 				) : (
 					<>
 						<Link href="/login">
-							<Button variant="headerAccountButton">Login</Button>
+							<Button
+								width="80px"
+								borderRadius="30px"
+								bg="#FFF8EA"
+								color="#815B5B"
+								_hover={{ backgroundColor: "#e3d6c5" }}
+								fontSize="15px"
+							>
+								Login
+							</Button>
 						</Link>
 						<span className={classes.paddingTen}></span>
 					</>

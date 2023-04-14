@@ -34,12 +34,31 @@ function BoardHeader(props) {
 					<Input
 						onBlur={updateBoardTitle}
 						onChange={updateTitle}
-						variant="titleInput"
 						value={boardTitle}
+						border="1px solid"
+						borderColor="#e3d6c5"
+						bg="inherit"
+						color="#FFF8EA"
+						fontSize="30px"
+						fontWeight="bold"
+						marginLeft="15px"
+						maxW="300px"
+						_hover={{
+							borderColor: "#594545",
+						}}
+						_focusVisible={{
+							borderColor: "#594545",
+						}}
 					/>
 				</div>
 			) : (
-				<Heading variant="boardHeading" onClick={toggleEditing}>
+				<Heading
+					color="#FFF8EA"
+					marginLeft="30px"
+					paddingTop="1%"
+					_hover={{ cursor: "pointer" }}
+					onClick={toggleEditing}
+				>
 					{boardTitle}
 				</Heading>
 			)}

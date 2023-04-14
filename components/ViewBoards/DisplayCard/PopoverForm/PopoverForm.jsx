@@ -44,7 +44,13 @@ function PopoverForm(props) {
 			<PopoverTrigger>
 				<IconButton
 					icon={<AddIcon />}
-					variant="boardDisplayIconButton"
+					position="absolute"
+					top="50%"
+					left="50%"
+					transform="translate(-50%, -50%)"
+					bg="#815B5B"
+					color="#FFF8EA"
+					_hover={{ backgroundColor: "#FFF8EA", color: "#815B5B" }}
 				></IconButton>
 			</PopoverTrigger>
 			<PopoverContent bg="var(--card-bg-coffee)">

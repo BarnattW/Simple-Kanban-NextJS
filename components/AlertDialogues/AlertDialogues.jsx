@@ -47,7 +47,15 @@ function AlertDialogues(props) {
 							>
 								Cancel
 							</Button>
-							<Button variant="deleteButton" onClick={props.delete}>
+							<Button
+								marginTop="5px"
+								borderRadius="10px"
+								bg="red.500"
+								color="#FFF8EA"
+								_hover={{ backgroundColor: "red.600", color: "#FFF8EA" }}
+								ml="3"
+								onClick={props.delete}
+							>
 								Delete
 							</Button>
 						</AlertDialogFooter>

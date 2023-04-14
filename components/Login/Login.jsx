@@ -200,7 +200,14 @@ function Login(props) {
 								</FormErrorMessage>
 							</FormControl>
 						)}
-						<Button variant="userAuthButton" type="submit">
+						<Button
+							width="100px"
+							borderRadius="30px"
+							bg="#815B5B"
+							color="#FFF8EA"
+							_hover={{ backgroundColor: "#594545" }}
+							type="submit"
+						>
 							{isLogin ? "Login" : "Create"}
 						</Button>
 

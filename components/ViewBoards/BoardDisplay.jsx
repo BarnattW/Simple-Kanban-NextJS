@@ -89,7 +89,14 @@ function BoardDisplay(props) {
 					})}
 					<Card maxW="300px" maxH="300px">
 						<CardBody display="flex" justifyContent="center" padding="0">
-							<Text variant="boardDisplayTitle" marginTop="30px">
+							<Text
+								color="#815B5B"
+								fontWeight="bold"
+								fontSize="20px"
+								marginTop="30px"
+								position="absolute"
+								textAlign="center"
+							>
 								Create New
 							</Text>
 							<Image

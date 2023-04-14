@@ -48,31 +48,6 @@ const Button = defineStyleConfig({
 			color: "#FFF8EA",
 			_hover: { backgroundColor: "#594545", color: "#FFF8EA" },
 		},
-		deleteButton: {
-			marginTop: "5px",
-			borderRadius: "10px",
-			bg: "red.500",
-			color: "#FFF8EA",
-			_hover: { backgroundColor: "red.600", color: "#FFF8EA" },
-			ml: "3",
-		},
-		//Header links
-		headerAccountButton: {
-			width: "80px",
-			borderRadius: "30px",
-			bg: "#FFF8EA",
-			color: "#815B5B",
-			_hover: { backgroundColor: "#e3d6c5" },
-			fontSize: "15px",
-		},
-		//Login and signup page
-		userAuthButton: {
-			width: "100px",
-			borderRadius: "30px",
-			bg: "#815B5B",
-			color: "#FFF8EA",
-			_hover: { backgroundColor: "#594545" },
-		},
 	},
 
 	defaultProps: {
