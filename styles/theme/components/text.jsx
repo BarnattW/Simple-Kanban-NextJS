@@ -14,7 +14,7 @@ const Text = defineStyleConfig({
 			color: "#FFF8EA",
 			fontSize: "lg",
 			_hover: { color: "#815B5B", bg: "#FFF8EA", cursor: "pointer" },
-			padding: "5% 0 5% 8%",
+			padding: "5px 0 5px 8px",
 		},
 	},
 

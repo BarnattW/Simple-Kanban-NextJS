@@ -7,11 +7,16 @@ import { signOut } from "next-auth/react";
 
 function SideBar(props) {
 	const [navActive, setNavActive] = useState(false);
+	const navWidth = navActive ? 125 : 40;
 
 	function toggleNav() {
 		setNavActive((prevBool) => {
 			return !prevBool;
 		});
+	}
+
+	function toggleOverlay() {
+		if (navActive == true) setNavActive(false);
 	}
 
 	//logout user and resets user context
@@ -20,16 +25,17 @@ function SideBar(props) {
 	}
 
 	return (
-		<div className={classes.flex}>
+		<>
 			<div
-				className={
-					navActive
-						? `${[classes.navMenu, classes.active, classes.sticky].join(" ")} `
-						: `${[classes.navMenu, classes.sticky].join(" ")}`
-				}
+				className={navActive ? `${classes.overlay}` : ""}
+				onClick={toggleOverlay}
+			></div>
+			<div
+				className={[classes.navMenu, classes.sticky].join(" ")}
+				style={{ width: navWidth }}
 			>
 				<div>
-					<div className={[classes.borderCoffee, classes.flex].join(" ")}>
+					<div className={classes.borderCoffee}>
 						<IconButton
 							icon={<HamburgerIcon boxSize={6} />}
 							variant="navIconButton"
@@ -57,7 +63,7 @@ function SideBar(props) {
 					</ul>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 }
 

@@ -1,15 +1,15 @@
 .navMenu {
     background-color: var(--header-bg-coffee);
-}
-
-.navMenu.active {
-    width: 125px;
-    min-width: 125px;
+    width: 0px;
+    transition: 0.25s;
+    left:0;
+    white-space: nowrap;
 }
 
 .sticky {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    z-index: 998;
+    height:100%
 }
 
 .borderCoffee {
@@ -23,4 +23,13 @@
 
 .hidden {
     display: none;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
 }

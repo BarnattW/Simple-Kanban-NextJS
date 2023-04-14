@@ -28,4 +28,5 @@
 
 .canvas { 
     background-color: var(--main-bg-coffee);
+    margin-left: 40px;
 }
