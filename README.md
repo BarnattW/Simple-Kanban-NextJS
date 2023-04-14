@@ -1,6 +1,6 @@
 This the Next.js version of a past project of mine. \
 Check it out here: \
-https://simplekanbanboardio.netlify.app/ \
+https://simple-kanban-next-js.vercel.app/ \
 Some dummy accounts: \
 user: a@gmail.com \
 password: 123456789 
