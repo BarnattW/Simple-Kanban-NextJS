@@ -1,7 +1,8 @@
+Demo: <br>
+[![Simple Kanban Demo]( https://img.youtube.com/vi/cZ2UPgGMKwA/0.jpg )](https://www.youtube.com/watch?v=cZ2UPgGMKwA) <br>
 <h1> Simple Kanban </h1>
 <p>
 This the Next.js version of a past project of mine. <br>
-Demo: [![Simple Kanban Demo](https://img.youtube.com/vi/cZ2UPgGMKwA/0.jpg)](https://www.youtube.com/watch?v=cZ2UPgGMKwA) <br>
 Check it out here: <br>
 https://simple-kanban-next-js.vercel.app/ <br>
 Dummy account: <br>
