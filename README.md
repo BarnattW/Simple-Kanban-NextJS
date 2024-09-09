@@ -1,6 +1,7 @@
 <h1> Simple Kanban </h1>
 <p>
 This the Next.js version of a past project of mine. <br>
+Demo: https://www.youtube.com/watch?v=cZ2UPgGMKwA
 Check it out here: <br>
 https://simple-kanban-next-js.vercel.app/ <br>
 Dummy account: <br>
